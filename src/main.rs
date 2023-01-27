@@ -26,8 +26,8 @@ fn main() {
         let _ = rx1;
         thread::sleep(Duration::from_secs(1));
         panic!("expected panic");
-        // Under Stable 1.66.1 sender `tx1` and the item in it's buffer are dropped after this panic
-        // Under Beta 1.67.0 the sender `tx1` and the data in it's buffer are not dropped here
+        // Under 1.66.1 sender `tx1` and the item in it's buffer are dropped after this panic
+        // Under 1.67.0 the sender `tx1` and the data in it's buffer are not dropped here
     });
     let _ = thread::spawn(move || rx2.recv());
 
@@ -38,6 +38,6 @@ fn main() {
 
     thread::sleep(Duration::from_secs(5));
     println!("Ending - {:?}", start.elapsed());
-    // Under Beta 1.67.0 the sender `tx1` and the data in it's buffer are only dropped when the
+    // Under 1.67.0 the sender `tx1` and the data in it's buffer are only dropped when the
     // whole process ends here
 }
